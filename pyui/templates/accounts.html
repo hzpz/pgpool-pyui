@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<!--suppress HtmlUnknownTarget -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'pgpool_stats.css') }}">
+    <title>PGPool Accounts</title>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th><a href="accounts?{{ build_sort_query(request, 'username') }}">Username</a></th>
+        <th><a href="accounts?{{ build_sort_query(request, 'level') }}">Level</a></th>
+        <th><a href="accounts?{{ build_sort_query(request, 'lures') }}">Lures</a></th>
+        <th><a href="accounts?{{ build_sort_query(request, 'system_id') }}">System</a></th>
+        <th><a href="accounts?{{ build_sort_query(request, 'last_modified') }}">Last modified</a></th>
+        <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% if not accounts %}
+    <tr>
+        <td colspan="6">No accounts</td>
+    </tr>
+    {% else %}
+    {% for account in accounts %}
+    <tr>
+        <td><a href="account/{{ account.username }}/events">{{ account.username }}</a></td>
+        <td>{{ account.level }}</td>
+        <td>{{ account.lures }}</td>
+        <td>{{ account.system_id }}</td>
+        <td>{{ account.last_modified }}</td>
+        <td>{{ account.get_status() }}</td>
+    </tr>
+    {% endfor %}
+    {% endif %}
+    </tbody>
+</table>
+</body>
+</html>

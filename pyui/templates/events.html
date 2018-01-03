@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<!--suppress HtmlUnknownTarget -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'pgpool_stats.css') }}">
+    <title>PGPool Events for {{ username }}</title>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>Timestamp</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% if not events %}
+    <tr>
+        <td colspan="2">No events</td>
+    </tr>
+    {% else %}
+    {% for event in events %}
+        <tr>
+            <td>{{ event.timestamp }}</td>
+            <td>{{ event.description }}</td>
+        </tr>
+    {% endfor %}
+    {% endif %}
+    </tbody>
+</table>
+</body>
+</html>
