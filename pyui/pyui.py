@@ -83,7 +83,3 @@ def _get_events(username):
         .join(model.Account) \
         .where(model.Account.username == username) \
         .order_by(model.Event.timestamp.desc())
-
-
-if __name__ == '__main__':
-    APP.run(debug=True)
